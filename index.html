@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple Deals — SEO Outreach Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-mark">SD</div>
+    <div>
+      <div class="brand-name">Simple Deals</div>
+      <div class="brand-sub">SEO Outreach Agent</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-tab="dashboard">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item" data-tab="find">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Find Prospects
+      <span class="nav-badge" id="badge-find" style="display:none">0</span>
+    </button>
+    <button class="nav-item" data-tab="compose">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M4 4l8 8 8-8"/></svg>
+      Compose Emails
+      <span class="nav-badge" id="badge-compose" style="display:none">0</span>
+    </button>
+    <button class="nav-item" data-tab="followup">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+      Follow Ups
+      <span class="nav-badge urgent" id="badge-fu" style="display:none">0</span>
+    </button>
+    <button class="nav-item" data-tab="tracker">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Tracker
+    </button>
+    <button class="nav-item" data-tab="settings">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="api-status" id="api-status">
+      <span class="status-dot dot-grey"></span>
+      <span id="api-status-text">API not configured</span>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-panel active" id="tab-dashboard">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-sub">Your SEO outreach at a glance</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" onclick="switchTab('find')">+ New Campaign</button>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon icon-blue">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M4 4l8 8 8-8"/></svg>
+        </div>
+        <div class="metric-val" id="dash-sent">0</div>
+        <div class="metric-lbl">Emails Sent</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon icon-green">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="metric-val" id="dash-replied">0</div>
+        <div class="metric-lbl">Replies</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon icon-amber">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="metric-val" id="dash-due">0</div>
+        <div class="metric-lbl">Follow-Ups Due</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon icon-red">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div class="metric-val" id="dash-links">0</div>
+        <div class="metric-lbl">Links Secured</div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3>Recent outreach</h3>
+          <button class="btn btn-sm" onclick="switchTab('tracker')">View all</button>
+        </div>
+        <div id="dash-recent-list">
+          <div class="empty-state">
+            <div class="empty-icon">📬</div>
+            <p>No outreach yet. Start by finding prospects.</p>
+            <button class="btn btn-primary" onclick="switchTab('find')">Find prospects →</button>
+          </div>
+        </div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3>Quick actions</h3>
+        </div>
+        <div class="quick-actions">
+          <button class="qa-btn" onclick="switchTab('find')">
+            <span class="qa-icon">🔍</span>
+            <div class="qa-text">
+              <div class="qa-title">Find new prospects</div>
+              <div class="qa-sub">Search for furniture & baby sites</div>
+            </div>
+          </button>
+          <button class="qa-btn" onclick="switchTab('followup')">
+            <span class="qa-icon">🔄</span>
+            <div class="qa-text">
+              <div class="qa-title">Check follow-ups</div>
+              <div class="qa-sub">Auto-written for overdue contacts</div>
+            </div>
+          </button>
+          <button class="qa-btn" onclick="switchTab('compose')">
+            <span class="qa-icon">✉️</span>
+            <div class="qa-text">
+              <div class="qa-title">Write & send emails</div>
+              <div class="qa-sub">AI drafts, your approval, SMTP send</div>
+            </div>
+          </button>
+          <button class="qa-btn" onclick="switchTab('settings')">
+            <span class="qa-icon">⚙️</span>
+            <div class="qa-text">
+              <div class="qa-title">Configure settings</div>
+              <div class="qa-sub">SMTP, API key, sender details</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIND PROSPECTS TAB -->
+  <div class="tab-panel" id="tab-find">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Find Prospects</h1>
+        <p class="page-sub">Discover Australian sites to target for backlinks</p>
+      </div>
+    </div>
+
+    <div class="filter-card">
+      <div class="filter-row">
+        <div class="field-group flex-2">
+          <label>Niche / Keywords</label>
+          <input type="text" id="kw-input" value="furniture Australia blog, home decor Australia, sofa review" placeholder="e.g. furniture Australia blog" />
+        </div>
+        <div class="field-group">
+          <label>Outreach type</label>
+          <select id="type-filter">
+            <option value="all">All types</option>
+            <option value="directory">Directory</option>
+            <option value="guest">Guest post</option>
+            <option value="niche">Niche backlink</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Min DA</label>
+          <input type="number" id="da-filter" value="20" min="1" max="100" />
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="field-group flex-2">
+          <label>Niche category</label>
+          <select id="niche-category">
+            <option value="furniture">Furniture & Home Decor</option>
+            <option value="baby">Baby & Kids</option>
+            <option value="appliances">Appliances</option>
+            <option value="outdoor">Outdoor & Garden</option>
+            <option value="all">All categories</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Max results</label>
+          <input type="number" id="max-filter" value="12" min="3" max="30" />
+        </div>
+        <div class="field-group" style="align-self:flex-end">
+          <button class="btn btn-primary btn-full" id="search-btn" onclick="runSearch()">
+            <span id="search-btn-txt">Search prospects</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="search-status" style="display:none" class="search-status">
+      <div class="spinner"></div>
+      <span id="search-status-txt">Searching Australian sites...</span>
+    </div>
+
+    <div id="prospects-container"></div>
+
+    <div id="prospect-actions" style="display:none" class="sticky-bar">
+      <span id="sel-count-txt" class="sel-count">0 selected</span>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="selectAllProspects()">Select all</button>
+        <button class="btn btn-primary" onclick="goToCompose()">Write emails for selected →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPOSE TAB -->
+  <div class="tab-panel" id="tab-compose">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Compose Emails</h1>
+        <p class="page-sub">Review, edit, and send via your company email</p>
+      </div>
+    </div>
+
+    <div class="notice-bar">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      Every email is fully editable below. Click "Send" only when you're happy. Sent via <strong>admin@simpledeals.com.au</strong> through your SMTP server.
+    </div>
+
+    <div class="compose-config">
+      <div class="field-group flex-2">
+        <label>Outreach angle</label>
+        <select id="cfg-angle">
+          <option>Guest post pitch</option>
+          <option>Directory listing request</option>
+          <option>Partnership / backlink exchange</option>
+          <option>Resource page collaboration</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Tone</label>
+        <select id="cfg-tone">
+          <option>Friendly & professional</option>
+          <option>Direct & confident</option>
+          <option>Warm & casual</option>
+        </select>
+      </div>
+      <div class="field-group" style="align-self:flex-end">
+        <button class="btn" onclick="regenerateAll()">Regenerate all</button>
+      </div>
+    </div>
+
+    <div id="email-compose-list">
+      <div class="empty-state">
+        <div class="empty-icon">✉️</div>
+        <p>Select prospects from the Find Prospects tab first.</p>
+        <button class="btn btn-primary" onclick="switchTab('find')">Go find prospects →</button>
+      </div>
+    </div>
+
+    <div id="compose-send-bar" style="display:none" class="sticky-bar">
+      <span class="sel-count" id="compose-count-txt"></span>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:12px;color:#888">Emails send from admin@simpledeals.com.au</span>
+        <button class="btn btn-primary" id="send-all-btn" onclick="sendAllEmails()">
+          <span id="send-all-txt">Send all emails</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOLLOW UPS TAB -->
+  <div class="tab-panel" id="tab-followup">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Follow Ups</h1>
+        <p class="page-sub">Auto-written for anyone who hasn't replied in 5+ days</p>
+      </div>
+      <button class="btn btn-primary" onclick="generateFollowUps()">Check overdue contacts</button>
+    </div>
+
+    <div id="followup-list">
+      <div class="empty-state">
+        <div class="empty-icon">🔄</div>
+        <p>Click "Check overdue contacts" to generate follow-up emails for anyone you haven't heard from in 5+ days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACKER TAB -->
+  <div class="tab-panel" id="tab-tracker">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Outreach Tracker</h1>
+        <p class="page-sub">Full pipeline status for every contact</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="loadDemoData()">Load demo data</button>
+        <button class="btn btn-primary" onclick="exportCSV()">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="tracker-filters">
+      <button class="filter-pill active" data-filter="all" onclick="filterTracker('all', this)">All</button>
+      <button class="filter-pill" data-filter="pending" onclick="filterTracker('pending', this)">Pending</button>
+      <button class="filter-pill" data-filter="sent" onclick="filterTracker('sent', this)">Sent</button>
+      <button class="filter-pill" data-filter="replied" onclick="filterTracker('replied', this)">Replied</button>
+      <button class="filter-pill" data-filter="secured" onclick="filterTracker('secured', this)">Secured</button>
+    </div>
+
+    <div class="tracker-table-wrap">
+      <table class="tracker-table">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Type</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>Days ago</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tracker-tbody">
+          <tr>
+            <td colspan="6">
+              <div class="empty-state" style="padding:2rem">
+                <div class="empty-icon">📊</div>
+                <p>No outreach tracked yet. Send some emails to get started.</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="tab-panel" id="tab-settings">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Settings</h1>
+        <p class="page-sub">Configure your API, SMTP, and sender details</p>
+      </div>
+    </div>
+
+    <div class="settings-grid">
+      <div class="settings-card">
+        <h3 class="settings-section-title">API Connection</h3>
+        <p class="settings-desc">Connect to the email API your developer deployed on Render.</p>
+        <div class="field-group">
+          <label>API Base URL</label>
+          <input type="text" id="cfg-api-url" placeholder="https://emailservicesapii-1.onrender.com" />
+        </div>
+        <div class="field-group">
+          <label>API Key</label>
+          <input type="password" id="cfg-api-key" placeholder="Your x-api-key value" />
+        </div>
+        <button class="btn btn-primary" onclick="testConnection()">
+          <span id="test-conn-txt">Test connection</span>
+        </button>
+        <div id="conn-result" class="conn-result" style="display:none"></div>
+      </div>
+
+      <div class="settings-card">
+        <h3 class="settings-section-title">Sender Details</h3>
+        <p class="settings-desc">Your company email details used in all outreach.</p>
+        <div class="field-group">
+          <label>Your name</label>
+          <input type="text" id="cfg-name" value="Juzar Ali" />
+        </div>
+        <div class="field-group">
+          <label>From email</label>
+          <input type="email" id="cfg-email" value="admin@simpledeals.com.au" />
+        </div>
+        <div class="field-group">
+          <label>Email password / app password</label>
+          <input type="password" id="cfg-password" placeholder="Your SMTP password" />
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()">Save settings</button>
+      </div>
+
+      <div class="settings-card">
+        <h3 class="settings-section-title">Email Signature</h3>
+        <textarea id="cfg-signature" rows="5">Juzar Ali | Simple Deals
+Australia's go-to store for furniture, home & baby essentials
+📞 1300 456 786 | admin@simpledeals.com.au
+simpledeals.com.au | ABN: [Your ABN]
+Free shipping Australia-wide on 8,000+ products</textarea>
+        <button class="btn" onclick="saveSettings()" style="margin-top:10px">Save signature</button>
+      </div>
+
+      <div class="settings-card">
+        <h3 class="settings-section-title">Automation</h3>
+        <div class="toggle-list">
+          <div class="toggle-row">
+            <div>
+              <div class="toggle-title">Follow-up after 5 days</div>
+              <div class="toggle-sub">Auto-write follow-up for no-reply contacts</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="tog-followup" checked /><span class="tog-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <div class="toggle-title">Preview before sending</div>
+              <div class="toggle-sub">Always review emails before they go out</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="tog-preview" checked /><span class="tog-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <div class="toggle-title">Skip already contacted</div>
+              <div class="toggle-sub">Hide sites already in your pipeline</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="tog-skip" checked /><span class="tog-slider"></span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
